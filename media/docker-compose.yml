@@ -6,3 +6,10 @@ services:
       - "8989:8989"
     volumes:
       - ${VEGA_MEDIA}:${MEDIA}
+
+  radarr:
+    build: radarr/.
+    ports: 
+      - "7878:7878"
+    volumes:
+      - ${VEGA_MEDIA}:${MEDIA}
