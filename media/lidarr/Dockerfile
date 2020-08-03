@@ -1,0 +1,45 @@
+FROM lsiobase/mono:LTS
+
+# image metadata
+ARG BUILD_DATE
+ARG VERSION
+ARG LIDARR_RELEASE
+LABEL build_version="version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+
+# set environment variables
+ARG DEBIAN_FRONTEND="noninteractive"
+ENV XDG_CONFIG_HOME="/config/xdg"
+ENV LIDARR_BRANCH="master"
+
+RUN \
+ echo "**** install packages ****" && \
+ apt-get update && \
+ apt-get install --no-install-recommends -y \
+	libchromaprint-tools \
+	jq && \
+ echo "**** install lidarr ****" && \
+ mkdir -p /app/lidarr/bin && \
+ if [ -z ${LIDARR_RELEASE+x} ]; then \
+	LIDARR_RELEASE=$(curl -sL "https://services.lidarr.audio/v1/update/${LIDARR_BRANCH}/changes?os=linux" \
+	| jq -r '.[0].version'); \
+ fi && \
+ lidarr_url=$(curl -sL "https://services.lidarr.audio/v1/update/${LIDARR_BRANCH}/changes?os=linux" \
+	| jq -r "first(.[] | select(.version == \"${LIDARR_RELEASE}\")) | .url") && \
+ curl -o \
+ /tmp/lidarr.tar.gz -L \
+	"${lidarr_url}" && \
+ tar ixzf \
+ /tmp/lidarr.tar.gz -C \
+	/app/lidarr/bin --strip-components=1 && \
+ echo "**** cleanup ****" && \
+ rm -rf \
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/tmp/*
+
+# copy local files
+COPY root/ /
+
+# ports and volumes
+EXPOSE 8686
+VOLUME /config
