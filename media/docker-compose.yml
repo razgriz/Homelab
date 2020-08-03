@@ -1,0 +1,8 @@
+version: '3'
+services:
+  sonarr:
+    build: sonarr/.
+    ports:
+      - "8989:8989"
+    volumes:
+      - ${VEGA_MEDIA}:${MEDIA}
