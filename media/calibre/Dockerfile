@@ -1,6 +1,6 @@
 FROM lsiobase/guacgui
 
-# set version label
+# image metadata
 ARG BUILD_DATE
 ARG VERSION
 ARG CALIBRE_RELEASE

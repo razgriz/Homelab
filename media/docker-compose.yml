@@ -62,6 +62,23 @@ services:
     #    environment: 
     #      - <<: *common-environment
     #      - DOCKER_MODS=linuxserver/calibre-web:calibre
+    
+  airsonic:
+    build: airsonic/.
+    container_name: airsonic
+    ports:
+      - "4040:4040"
+    environment: *common-environment
+    volumes:
+      - type: bind
+        source: ${VEGA_MEDIA_MUSIC}
+        target: /music
+      - type: bind
+        source: ${VEGA_MEDIA_PLAYLISTS}
+        target: /playlists
+      - type: bind
+        source: ${VEGA_MEDIA_PODCASTS}
+        target: /podcasts
 
 #  lazylibrarian:
 #    build: lazylibrarian/.
