@@ -44,3 +44,18 @@ services:
       - "9117:9117"
     environment: *common-environment
 
+  lazylibrarian:
+    build: lazylibrarian/.
+    container_name: lazylibrarian
+    ports:
+      - "5299:5299"
+    environment: *common-environment
+    volumes:
+      - type: bind
+        source: ${VEGA_MEDIA_BOOKS}
+        target: /books
+      - type: bind
+        source: ${VEGA_MEDIA_TEMP}
+        target: /download
+
+
