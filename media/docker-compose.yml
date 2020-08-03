@@ -44,18 +44,37 @@ services:
       - "9117:9117"
     environment: *common-environment
 
-  lazylibrarian:
-    build: lazylibrarian/.
-    container_name: lazylibrarian
+  calibre:
+    build: calibre/.
+    container_name: calibre
     ports:
-      - "5299:5299"
+      - "8080:8080"
+      - "8081:8081"
     environment: *common-environment
-    volumes:
-      - type: bind
-        source: ${VEGA_MEDIA_BOOKS}
-        target: /books
-      - type: bind
-        source: ${VEGA_MEDIA_TEMP}
-        target: /download
+    volumes: *media-volume
+
+    #  calibre-web:
+    #    build: calibre-web/.
+    #    container_name: calibre-web
+    #    ports:
+    #      - "8080:8080"
+    #      - "8081:8081"
+    #    environment: 
+    #      - <<: *common-environment
+    #      - DOCKER_MODS=linuxserver/calibre-web:calibre
+
+#  lazylibrarian:
+#    build: lazylibrarian/.
+#    container_name: lazylibrarian
+#    ports:
+#      - "5299:5299"
+#    environment: *common-environment
+#    volumes:
+#      - type: bind
+#        source: ${VEGA_MEDIA_BOOKS}
+#        target: /books
+#      - type: bind
+#        source: ${VEGA_MEDIA_TEMP}
+#        target: /download
 
 
