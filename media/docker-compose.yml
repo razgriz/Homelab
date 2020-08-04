@@ -71,13 +71,13 @@ services:
     environment: *common-environment
     volumes:
       - type: bind
-        source: ${VEGA_MEDIA_MUSIC}
+        source: ${VEGA_MEDIA}/${VEGA_MEDIA_MUSIC}
         target: /music
       - type: bind
-        source: ${VEGA_MEDIA_PLAYLISTS}
+        source: ${VEGA_MEDIA}/${VEGA_MEDIA_PLAYLISTS}
         target: /playlists
       - type: bind
-        source: ${VEGA_MEDIA_PODCASTS}
+        source: ${VEGA_MEDIA}/${VEGA_MEDIA_PODCASTS}
         target: /podcasts
 
 #  lazylibrarian:
