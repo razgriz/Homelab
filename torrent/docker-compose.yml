@@ -1,0 +1,34 @@
+version: "3.7"
+
+x-common-env:
+  &common-environment
+  PUID: ${PUID}
+  GUID: ${GUID}
+  TZ: ${TZ}
+
+x-vpn-env:
+  &vpn-environment
+  VPN_ENABLED: ${VPN_ENABLED}
+  LAN_NETWORK: ${LAN_NETWORK}
+  VPN_USERNAME: ${VPN_USERNAME}
+  VPN_PASSWORD: ${VPN_PASSWORD}
+
+x-downloads-volume:
+  &downloads-volume 
+  - type: bind
+    source: ${VEGA_MEDIA}/${VEGA_MEDIA_TEMP}
+    target: ${DOWNLOADS}
+
+services:
+  qbittorrentvpn:
+    build: qBittorrentvpn/.
+    container_name: qbittorrentvpn
+    privileged: true
+    ports:
+      - "8080:8080"
+      - "8999:8999"
+      - "8999:8999/udp"
+    environment: 
+      <<: *common-environment
+      <<: *vpn-environment
+    volumes: *downloads-volume
