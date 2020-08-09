@@ -48,8 +48,8 @@ services:
     container_name: jackett
     ports:
       - "9117:9117"
-    environment: 
-      - <<: *common-environment
+    environment: *common-environment
+    volumes:
       - ${CONFIG_PATH}/jackett:/config
 
   calibre:
