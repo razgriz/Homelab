@@ -3,7 +3,7 @@ version: "3.4"
 x-common-env:
   &common-environment
   PUID: ${PUID}
-  GUID: ${GUID}
+  PGID: ${PGID}
   TZ: ${TZ}
 
 x-media-volume:
@@ -29,7 +29,9 @@ services:
     ports: 
       - "7878:7878"
     environment: *common-environment
-    volumes: *media-volume
+    volumes: 
+      - <<: *media-volume
+      - ${CONFIG_PATH}/radarr:/config
 
   lidarr:
     build: lidarr
@@ -37,14 +39,18 @@ services:
     ports:
       - "8686:8686"
     environment: *common-environment
-    volumes: *media-volume
+    volumes: 
+      - <<: *media-volume
+      - ${CONFIG_PATH}/lidarr:/config
 
   jackett:
     build: jackett/.
     container_name: jackett
     ports:
       - "9117:9117"
-    environment: *common-environment
+    environment: 
+      - <<: *common-environment
+      - ${CONFIG_PATH}/jackett:/config
 
   calibre:
     build: calibre/.
@@ -72,6 +78,7 @@ services:
       - "4040:4040"
     environment: *common-environment
     volumes:
+      - ${CONFIG_PATH}/airsonic:/config
       - type: bind
         source: ${VEGA_MEDIA}/${VEGA_MEDIA_MUSIC}
         target: /music

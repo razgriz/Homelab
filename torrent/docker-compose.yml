@@ -3,7 +3,7 @@ version: "3.4"
 x-common-env:
   &common-environment
   PUID: ${PUID}
-  GUID: ${GUID}
+  PGID: ${PGID}
   TZ: ${TZ}
 
 x-vpn-env:
