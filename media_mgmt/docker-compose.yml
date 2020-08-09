@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.4"
 
 x-common-env:
   &common-environment
@@ -19,7 +19,9 @@ services:
     ports:
       - "8989:8989"
     environment: *common-environment
-    volumes: *media-volume
+    volumes: 
+      - <<: *media-volume
+      - ${CONFIG_PATH}/sonarr:/config
 
   radarr:
     build: radarr/.
