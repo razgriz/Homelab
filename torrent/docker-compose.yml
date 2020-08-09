@@ -32,3 +32,4 @@ services:
       <<: *common-environment
       <<: *vpn-environment
     volumes: *downloads-volume
+    restart: unless-stopped

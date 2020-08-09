@@ -22,6 +22,7 @@ services:
     volumes: 
       - <<: *media-volume
       - ${CONFIG_PATH}/sonarr:/config
+    restart: unless-stopped
 
   radarr:
     build: radarr/.
@@ -32,6 +33,7 @@ services:
     volumes: 
       - <<: *media-volume
       - ${CONFIG_PATH}/radarr:/config
+    restart: unless-stopped
 
   lidarr:
     build: lidarr
@@ -42,6 +44,7 @@ services:
     volumes: 
       - <<: *media-volume
       - ${CONFIG_PATH}/lidarr:/config
+    restart: unless-stopped
 
   jackett:
     build: jackett/.
@@ -51,6 +54,7 @@ services:
     environment: *common-environment
     volumes:
       - ${CONFIG_PATH}/jackett:/config
+    restart: unless-stopped
 
   calibre:
     build: calibre/.
@@ -60,6 +64,7 @@ services:
       - "8081:8081"
     environment: *common-environment
     volumes: *media-volume
+    restart: unless-stopped
 
     #  calibre-web:
     #    build: calibre-web/.
@@ -88,6 +93,7 @@ services:
       - type: bind
         source: ${VEGA_MEDIA}/${VEGA_MEDIA_PODCASTS}
         target: /podcasts
+    restart: unless-stopped
 
 #  lazylibrarian:
 #    build: lazylibrarian/.
