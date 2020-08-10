@@ -11,6 +11,9 @@ x-media-volume:
   - type: bind
     source: ${VEGA_MEDIA}
     target: ${MEDIA}
+  - type: bind
+    source: ${VEGA_MEDIA}/temp
+    target: ${DOWNLOADS}
 
 services:
   sonarr:
