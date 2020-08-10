@@ -47,4 +47,4 @@ COPY root/ /
 
 # ports and volumes
 EXPOSE 4040
-VOLUME /config /media /music /playlists /podcasts
+VOLUME /config /music /playlists /podcasts

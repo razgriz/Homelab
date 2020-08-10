@@ -39,4 +39,4 @@ COPY root/ /
 
 # ports and volumes
 EXPOSE 8989
-VOLUME /config /downloads
+VOLUME /config
