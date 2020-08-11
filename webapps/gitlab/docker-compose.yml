@@ -1,5 +1,10 @@
 version: '3.4'
 
+x-common-env:
+  &common-environment
+  PUID: 1000
+  PGID: 1000
+
 x-gitlab-volume:
   &gitlab-volume
   - type: bind
@@ -25,6 +30,7 @@ services:
     image: 'gitlab/gitlab-ce:latest'
     hostname: 'gitlab.vega'
     environment:
+      <<: *common-environment
       VIRTUAL_HOST: gitlab.vega
       VIRTUAL_PORT: 8929
       GITLAB_OMNIBUS_CONFIG: |
