@@ -2,11 +2,10 @@ version: '3.4'
 services:
   web:
     image: 'gitlab/gitlab-ce:latest'
+    hostname: 'gitlab.vega'
     environment:
-      GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
-    configs:
-      - source: gitlab
-        target: /omnibus_config.rb
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.vega:8929'
     ports:
       - '8929:8929'
       - '443:443'
@@ -15,13 +14,3 @@ services:
       - '/mnt/secure/WebApps/gitlab/config:/etc/gitlab'
       - '/mnt/secure/Webapps/logs:/var/log/gitlab'
       - '/mnt/secure/Webapps/data:/var/opt/gitlab'
-    secrets:
-      - gitlab_root_password
-
-configs:
-  gitlab:
-    file: ./gitlab.rb
-
-secrets:
-  gitlab_root_password:
-    file: /mnt/secure/WebApps/gitlab/gitlab_root_password.txt
