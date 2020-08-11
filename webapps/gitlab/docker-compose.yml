@@ -12,5 +12,5 @@ services:
       - '22:22'
     volumes:
       - '/mnt/secure/WebApps/gitlab/config:/etc/gitlab'
-      - '/mnt/secure/Webapps/logs:/var/log/gitlab'
-      - '/mnt/secure/Webapps/data:/var/opt/gitlab'
+      - '/mnt/secure/Webapps/gitlab/logs:/var/log/gitlab'
+      - '/mnt/secure/Webapps/gitlab/data:/var/opt/gitlab'
