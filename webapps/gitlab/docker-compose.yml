@@ -1,0 +1,27 @@
+version: '3.4'
+services:
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
+    config:
+      - source: gitlab
+        target: /omnibus_config.rb
+    ports:
+      - '8929:8929'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - '/mnt/secure/WebApps/gitlab/config:/etc/gitlab'
+      - '/mnt/secure/Webapps/logs:/var/log/gitlab'
+      - '/mnt/secure/Webapps/data:/var/opt/gitlab'
+    secrets:
+      - gitlab_root_password
+
+configs:
+  gitlab:
+    file: ./gitlab.rb
+
+secrets:
+  gitlab_root_password:
+    file: /mnt/secure/WebApps/gitlab/gitlab_root_password.txt
