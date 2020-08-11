@@ -11,10 +11,10 @@ x-gitlab-volume:
     source: /mnt/secure/WebApps/gitlab/config
     target: /etc/gitlab
   - type: bind
-    source: /mnt/secure/WebApps/gitlab/logs
+    source: /home/jkim/gitlab/logs
     target: /var/log/gitlab
   - type: bind
-    source: /mnt/secure/WebApps/gitlab/data
+    source: /home/jkim/gitlab/data
     target: /var/opt/gitlab
 
 services:
