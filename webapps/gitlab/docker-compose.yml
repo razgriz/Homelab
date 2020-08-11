@@ -4,7 +4,7 @@ services:
     image: 'gitlab/gitlab-ce:latest'
     environment:
       GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
-    config:
+    configs:
       - source: gitlab
         target: /omnibus_config.rb
     ports:
