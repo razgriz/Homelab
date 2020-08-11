@@ -28,6 +28,7 @@ services:
     environment: 
       <<: *common-environment
       VIRTUAL_HOST: ${HOST_SONARR}.${DOMAIN_END}
+      VIRTUAL_PORT: 8989
     volumes: 
       - <<: *media-volume
       - ${CONFIG_PATH}/sonarr:/config
@@ -53,7 +54,7 @@ services:
       - "8686:8686"
     environment: 
       <<: *common-environment
-      VIRTUAL_HOST: ${HOST_LIDARR}.{DOMAIN_END}
+      VIRTUAL_HOST: ${HOST_LIDARR}.${DOMAIN_END}
     volumes: 
       - <<: *media-volume
       - ${CONFIG_PATH}/lidarr:/config
@@ -66,7 +67,7 @@ services:
       - "9117:9117"
     environment: 
       <<: *common-environment
-      VIRTUAL_HOST: ${HOST_JACKETT}.{DOMAIN_END}
+      VIRTUAL_HOST: ${HOST_JACKETT}.${DOMAIN_END}
     volumes:
       - ${CONFIG_PATH}/jackett:/config
     restart: unless-stopped
@@ -79,7 +80,7 @@ services:
       - "8081:8081"
     environment: 
       <<: *common-environment
-      VIRTUAL_HOST: ${HOST_CALIBRE}.{DOMAIN_END}
+      VIRTUAL_HOST: ${HOST_CALIBRE}.${DOMAIN_END}
     volumes: *media-volume
     restart: unless-stopped
 
@@ -100,7 +101,7 @@ services:
       - "4040:4040"
     environment:
       <<: *common-environment
-      VIRTUAL_HOST: ${HOST_AIRSONIC}.{DOMAIN_END}
+      VIRTUAL_HOST: ${HOST_AIRSONIC}.${DOMAIN_END}
     volumes:
       - ${CONFIG_PATH}/airsonic:/config
       - type: bind
