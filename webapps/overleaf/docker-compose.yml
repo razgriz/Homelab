@@ -45,6 +45,7 @@ services:
 
           ## Set for SSL via nginx-proxy
           VIRTUAL_HOST: overleaf.vega
+          VIRTUAL_PORT: 8080
 
           # SHARELATEX_SITE_URL: http://sharelatex.mydomain.com
           # SHARELATEX_NAV_TITLE: Our ShareLaTeX Instance
@@ -136,7 +137,7 @@ services:
       image: jwilder/nginx-proxy
       container_name: nginx-proxy
       ports:
-        #- "80:80"
+        - "80:80"
         - "443:443"
       volumes:
         - /var/run/docker.sock:/tmp/docker.sock:ro
