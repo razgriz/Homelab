@@ -44,8 +44,7 @@ services:
           TEXMFVAR: /var/lib/sharelatex/tmp/texmf-var
 
           ## Set for SSL via nginx-proxy
-          VIRTUAL_HOST: overleaf
-          VIRTUAL_PORT: 8080
+          VIRTUAL_HOST: overleaf.vega
 
           # SHARELATEX_SITE_URL: http://sharelatex.mydomain.com
           # SHARELATEX_NAV_TITLE: Our ShareLaTeX Instance
