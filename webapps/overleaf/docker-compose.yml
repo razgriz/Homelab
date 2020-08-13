@@ -141,4 +141,4 @@ services:
         - "443:443"
       volumes:
         - /var/run/docker.sock:/tmp/docker.sock:ro
-        - /home/sharelatex/tmp:/etc/nginx/certs
+        - /mnt/secure/WebApps/overleaf/sharelatex_data/tmp:/etc/nginx/certs
