@@ -82,6 +82,7 @@ services:
     environment: 
       <<: *common-environment
       VIRTUAL_HOST: ${HOST_CALIBRE}.${DOMAIN_END}
+      VIRTUAL_HOST: 8080
     volumes: *media-volume
     restart: unless-stopped
 
