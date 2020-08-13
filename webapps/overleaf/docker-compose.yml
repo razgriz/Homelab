@@ -10,7 +10,7 @@ services:
           - mongo
           - redis
         ports:
-          - 80:80
+          - 8080:80
         links:
           - mongo
           - redis
@@ -44,7 +44,8 @@ services:
           TEXMFVAR: /var/lib/sharelatex/tmp/texmf-var
 
           ## Set for SSL via nginx-proxy
-          #VIRTUAL_HOST: 103.112.212.22
+          VIRTUAL_HOST: overleaf
+          VIRTUAL_PORT: 8080
 
           # SHARELATEX_SITE_URL: http://sharelatex.mydomain.com
           # SHARELATEX_NAV_TITLE: Our ShareLaTeX Instance
@@ -132,12 +133,12 @@ services:
     # settings. We recommend using a properly managed nginx instance outside of the Overleaf Server Pro setup,
     # but the example here can be used if you'd prefer to run everything with docker-compose
 
-    # nginx-proxy:
-    #     image: jwilder/nginx-proxy
-    #     container_name: nginx-proxy
-    #     ports:
-    #       #- "80:80"
-    #       - "443:443"
-    #     volumes:
-    #       - /var/run/docker.sock:/tmp/docker.sock:ro
-    #       - /home/sharelatex/tmp:/etc/nginx/certs
+     nginx-proxy:
+         image: jwilder/nginx-proxy
+         container_name: nginx-proxy
+         ports:
+           #- "80:80"
+           - "443:443"
+         volumes:
+           - /var/run/docker.sock:/tmp/docker.sock:ro
+           - /home/sharelatex/tmp:/etc/nginx/certs
