@@ -41,5 +41,7 @@ services:
       <<: *vpn-environment
       VIRTUAL_HOST: ${HOST_QBITTORRENT}.${DOMAIN_END}
       VIRTUAL_PORT: 8080
-    volumes: *downloads-volume
+    volumes: 
+      - <<: *downloads-volume
+      - ${CONFIG_PATH}/qbittorrent:/config
     restart: unless-stopped
