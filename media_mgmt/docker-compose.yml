@@ -99,7 +99,7 @@ services:
       - ${CONFIG_PATH}/calibre-web:/config
       - type: bind
         source: ${VEGA_MEDIA}/${VEGA_MEDIA_BOOKS}
-        target: :/books
+        target: /books
     restart: unless-stopped
 
   airsonic:
