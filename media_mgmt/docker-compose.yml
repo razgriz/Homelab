@@ -92,8 +92,9 @@ services:
     ports:
       - "8083:8083"
     environment:
-      - <<: *common-environment
-      - DOCKER_MODS=linuxserver/calibre-web:calibre    
+      <<: *common-environment
+      DOCKER_MODS: linuxserver/calibre-web:calibre
+      VIRTUAL_HOST: ${HOST_CALIBRE_WEB}.${DOMAIN_END}
     volumes:
       - ${CONFIG_PATH}/calibre-web:/config
       - type: bind
