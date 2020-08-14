@@ -73,29 +73,34 @@ services:
       - ${CONFIG_PATH}/jackett:/config
     restart: unless-stopped
 
-  calibre:
-    build: calibre/.
-    container_name: calibre
+#calibre:
+#    build: calibre/.
+#    container_name: calibre
+#    ports:
+#      - "8080:8080"
+#      - "8081:8081"
+#    environment: 
+#      <<: *common-environment
+#      VIRTUAL_HOST: ${HOST_CALIBRE}.${DOMAIN_END}
+#      VIRTUAL_PORT: 8080
+#    volumes: *media-volume
+#    restart: unless-stopped
+
+  calibre-web:
+    image: linuxserver/calibre-web
+    container_name: calibre-web
     ports:
-      - "8080:8080"
-      - "8081:8081"
-    environment: 
-      <<: *common-environment
-      VIRTUAL_HOST: ${HOST_CALIBRE}.${DOMAIN_END}
-      VIRTUAL_PORT: 8080
-    volumes: *media-volume
+      - "8083:8083"
+    environment:
+      - <<: *common-environment
+      - DOCKER_MODS=linuxserver/calibre-web:calibre    
+    volumes:
+      - ${CONFIG_PATH}/calibre-web:/config
+      - type: bind
+        source: ${VEGA_MEDIA}/${VEGA_MEDIA_BOOKS}
+        target: :/books
     restart: unless-stopped
 
-    #  calibre-web:
-    #    build: calibre-web/.
-    #    container_name: calibre-web
-    #    ports:
-    #      - "8080:8080"
-    #      - "8081:8081"
-    #    environment: 
-    #      - <<: *common-environment
-    #      - DOCKER_MODS=linuxserver/calibre-web:calibre
-    
   airsonic:
     build: airsonic/.
     container_name: airsonic
