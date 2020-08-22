@@ -145,10 +145,10 @@ services:
       container_name: bookstack
       environment: 
         <<: *common-environment
-        - DB_HOST=bookstack_db
-        - DB_USER=bookstack
-        - DB_PASS=yourdbpass
-        - DB_DATABASE=bookstackapp
+        DB_HOST: bookstack_db
+        DB_USER: bookstack
+        DB_PASS: yourdbpass
+        DB_DATABASE: bookstackapp
       volumes:
         - /home/jkim/webapps/bookstack:/config
       ports:
@@ -162,10 +162,10 @@ services:
       container_name: bookstack_db
       environment:
         <<: *common-environment
-        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-        - MYSQL_DATABASE=bookstackapp
-        - MYSQL_USER=bookstack
-        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: bookstackapp
+        MYSQL_USER: bookstack
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       volumes:
         - /home/jkim/webapps/bookstack_db:/config
       restart: unless-stopped
