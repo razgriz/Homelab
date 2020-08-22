@@ -149,6 +149,7 @@ services:
         DB_USER: bookstack
         DB_PASS: yourdbpass
         DB_DATABASE: bookstackapp
+        VIRTUAL_HOST: bookstack.vega
       volumes:
         - /home/jkim/webapps/bookstack:/config
       ports:
@@ -179,3 +180,4 @@ services:
       volumes:
         - /var/run/docker.sock:/tmp/docker.sock:ro
         - /home/jkim/webapps/overleaf/certs:/etc/nginx/certs
+      restart: unless-stopped
