@@ -1,4 +1,11 @@
 version: '3.4'
+
+x-common-env:
+  &common-environment
+  PUID: ${PUID}
+  PGID: ${PGID}
+  TZ: ${TZ}
+
 services:
     sharelatex:
         restart: unless-stopped
@@ -132,6 +139,36 @@ services:
     # and https://github.com/overleaf/overleaf/wiki/HTTPS-reverse-proxy-using-Nginx for an example of some recommended
     # settings. We recommend using a properly managed nginx instance outside of the Overleaf Server Pro setup,
     # but the example here can be used if you'd prefer to run everything with docker-compose
+    
+    bookstack:
+      image: linuxserver/bookstack
+      container_name: bookstack
+      environment: 
+        <<: *common-environment
+        - DB_HOST=bookstack_db
+        - DB_USER=bookstack
+        - DB_PASS=yourdbpass
+        - DB_DATABASE=bookstackapp
+      volumes:
+        - /home/jkim/webapps/bookstack:/config
+      ports:
+        - "6875:80"
+      restart: unless-stopped
+      depends_on:
+        - bookstack_db
+    
+    bookstack_db:
+      image: linuxserver/mariadb
+      container_name: bookstack_db
+      environment:
+        <<: *common-environment
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE=bookstackapp
+        - MYSQL_USER=bookstack
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      volumes:
+        - /home/jkim/webapps/bookstack_db:/config
+      restart: unless-stopped
 
     nginx-proxy:
       image: jwilder/nginx-proxy
