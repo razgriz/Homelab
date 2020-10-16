@@ -15,7 +15,7 @@ services:
           - mongo
           - redis
         ports:
-          - 8080:80
+          - 8081:80
         links:
           - mongo
           - redis
