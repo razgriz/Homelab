@@ -19,6 +19,6 @@ services:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
       MYSQL_USER: 'npm'
-      MYSQL_PASSWORD: 'npm'
+      MYSQL_PASSWORD: PASSWORD
     volumes:
       - /home/jkim/webapps/nginx-proxy-manager/data/mysql:/var/lib/mysql
