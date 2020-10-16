@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  bookstack:
+    image: linuxserver/bookstack
+    container_name: bookstack
+    environment: 
+      PUID: 1000
+      PGID: 1000
+      TZ: America/Toronto
+      DB_HOST: bookstack_db
+      DB_USER: bookstack
+      DB_PASS: PASSWORD
+      DB_DATABASE: bookstackapp
+      VIRTUAL_HOST: bookstack.joelkim.ca
+    volumes:
+      - /home/jkim/webapps/bookstack:/config
+    ports:
+      - "6875:80"
+    restart: unless-stopped
+    depends_on:
+      - bookstack_db
+  bookstack_db:
+    image: linuxserver/mariadb
+    container_name: bookstack_db
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: America/Toronto
+      MYSQL_ROOT_PASSWORD: PASSWORD
+      MYSQL_DATABASE: bookstackapp
+      MYSQL_USER: bookstack
+      MYSQL_PASSWORD: PASSWORD
+    volumes:
+      - /home/jkim/webapps/bookstack_db:/config
+    restart: unless-stopped
