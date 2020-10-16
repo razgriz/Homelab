@@ -1,9 +1,5 @@
 version: '3.4'
 
-  PUID: ${PUID}
-  PGID: ${PGID}
-  TZ: ${TZ}
-
 services:
     sharelatex:
         restart: unless-stopped
