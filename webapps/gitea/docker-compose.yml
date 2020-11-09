@@ -15,7 +15,7 @@ services:
       - DB_HOST=db:3306
       - DB_NAME=gitea
       - DB_USER=gitea
-      - DB_PASSWD=gitea
+      - DB_PASSWD=PASSWORD
     restart: always
     networks:
       - gitea
@@ -35,7 +35,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=PASSWORD
       - MYSQL_USER=gitea
-      - MYSQL_PASSWORD=gitea
+      - MYSQL_PASSWORD=PASSWORD
       - MYSQL_DATABASE=gitea
     networks:
       - gitea
