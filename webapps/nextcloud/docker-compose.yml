@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes:
   nextcloud:
@@ -24,5 +24,9 @@ services:
     volumes:
       - /home/jkim/webapps/nextcloud:/var/www/html
     restart: always
+    environment:
+      - POSTGRES_PASSWORD=PASSWORD
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
     depends_on:
       - db
