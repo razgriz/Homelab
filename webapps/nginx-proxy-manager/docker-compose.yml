@@ -8,6 +8,7 @@ services:
       - "80:80"
       - "81:81"
       - "443:443"
+    restart: unless-stopped
     volumes:
       - /home/jkim/webapps/nginx-proxy-manager/production.json:/app/config/production.json
       - /home/jkim/webapps/nginx-proxy-manager/data:/data
@@ -19,6 +20,7 @@ services:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
       MYSQL_USER: 'npm'
-      MYSQL_PASSWORD: PASSWORD
+      MYSQL_PASSWORD: 'jykim972'
+    restart: unless-stopped
     volumes:
       - /home/jkim/webapps/nginx-proxy-manager/data/mysql:/var/lib/mysql
